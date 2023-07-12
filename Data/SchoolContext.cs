@@ -21,7 +21,7 @@ public class SchoolContext : DbContext
         modelBuilder.Entity<Course>().ToTable(nameof(Courses))
             .HasMany(c => c.Instructors)
             .WithMany(i => i.Courses);
-        modelBuilder.Entity<Enrollment>().ToTable(nameof(Enrollments));
+        // modelBuilder.Entity<Enrollment>().ToTable(nameof(Enrollments));
         modelBuilder.Entity<Student>().ToTable(nameof(Students));
         modelBuilder.Entity<Instructor>().ToTable(nameof(Instructors));
     }
