@@ -9,6 +9,15 @@ public class SchoolContext : DbContext
     {
     }
 
+    // enable ef core logging for easire debugging
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        optionsBuilder.LogTo(
+                action: Console.WriteLine,
+                minimumLevel: LogLevel.Information
+                );
+    }
+
     public DbSet<Student> Students => Set<Student>();
     public DbSet<Enrollment> Enrollments => Set<Enrollment>();
     public DbSet<Course> Courses => Set<Course>();
