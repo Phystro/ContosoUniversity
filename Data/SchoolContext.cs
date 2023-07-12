@@ -12,10 +12,13 @@ public class SchoolContext : DbContext
     // enable ef core logging for easire debugging
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.LogTo(
-                action: Console.WriteLine,
-                minimumLevel: LogLevel.Information
-                );
+        optionsBuilder
+            .LogTo(
+                    action: Console.WriteLine,
+                    minimumLevel: LogLevel.Information
+                  )
+            .EnableSensitiveDataLogging()
+            .EnableDetailedErrors();
     }
 
     public DbSet<Student> Students => Set<Student>();
