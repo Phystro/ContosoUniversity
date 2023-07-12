@@ -49,7 +49,7 @@ public class EditModel : PageModel
 
         studentToUpdate.FirstMidName = Student.FirstMidName;
         studentToUpdate.LastName = Student.LastName;
-        studentToUpdate.EnrollmentDate = Student.EnrollmentDate;
+        studentToUpdate.EnrollmentDate = Student.EnrollmentDate.ToUniversalTime();
 
         await _context.SaveChangesAsync();
         return RedirectToPage("./Index");
