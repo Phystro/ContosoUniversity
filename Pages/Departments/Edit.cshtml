@@ -11,10 +11,10 @@
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Department.DepartmentId" />
-            <input type="hidden" asp-for="Department.ConcurrencyToken" />
+            <!-- <input type="hidden" asp-for="Department.ConcurrencyToken" /> -->
             <div class="form-group">
                 <label>Version</label>
-                @Utility.GetLastChars(Model.Department.ConcurrencyToken)
+                <!-- @Utility.GetLastChars(Model.Department.ConcurrencyToken) -->
             </div>
             <div class="form-group">
                 <label asp-for="Department.Name" class="control-label"></label>

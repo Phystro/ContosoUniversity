@@ -40,7 +40,7 @@ public class EditModel : PageModel
         return Page();
     }
 
-    #region snippet_RowVersion_sl
+    // #region snippet_RowVersion_sl
     public async Task<IActionResult> OnPostAsync(int id)
     {
         if (!ModelState.IsValid)
@@ -59,48 +59,48 @@ public class EditModel : PageModel
             return HandleDeletedDepartment();
         }
 
-        departmentToUpdate.ConcurrencyToken = Guid.NewGuid();
-
-        // Set ConcurrencyToken to value read in OnGetAsync
-        _context.Entry(departmentToUpdate).Property(d => d.ConcurrencyToken)
-            .OriginalValue = Department.ConcurrencyToken;
-            #endregion
-            #endregion
-
-        #region snippet_TryUpdateModel
-        if (await TryUpdateModelAsync<Department>(
-                    departmentToUpdate,
-                    "Department",
-                    s => s.Name, s => s.StartDate, s => s.Budget, s => s.InstructorId))
-        {
-            try
-            {
-                await _context.SaveChangesAsync();
-                return RedirectToPage("./Index");
-            }
-            catch (DbUpdateConcurrencyException ex)
-            {
-                var exceptionEntry = ex.Entries.Single();
-                var clientValues = (Department)exceptionEntry.Entity;
-                var databaseEntry = exceptionEntry.GetDatabaseValues();
-                if (databaseEntry == null)
-                {
-                    ModelState.AddModelError(string.Empty, "Unable to save. " +
-                            "The department was deleted by another user.");
-                    return Page();
-                }
-
-                var dbValues = (Department)databaseEntry.ToObject();
-                await SetDbErrorMessage(dbValues, clientValues, _context);
-
-                // Save the current ConcurrencyToken so next postback
-                // matches unless an new concurrency issue happens.
-                Department.ConcurrencyToken = dbValues.ConcurrencyToken;
-                // Clear the model error for the next postback.
-                ModelState.Remove($"{nameof(Department)}.{nameof(Department.ConcurrencyToken)}");
-            }
-            #endregion
-        }
+        // departmentToUpdate.ConcurrencyToken = Guid.NewGuid();
+        //
+        // // Set ConcurrencyToken to value read in OnGetAsync
+        // _context.Entry(departmentToUpdate).Property(d => d.ConcurrencyToken)
+        //     .OriginalValue = Department.ConcurrencyToken;
+        //     #endregion
+        //     #endregion
+        //
+        // #region snippet_TryUpdateModel
+        // if (await TryUpdateModelAsync<Department>(
+        //             departmentToUpdate,
+        //             "Department",
+        //             s => s.Name, s => s.StartDate, s => s.Budget, s => s.InstructorId))
+        // {
+        //     try
+        //     {
+        //         await _context.SaveChangesAsync();
+        //         return RedirectToPage("./Index");
+        //     }
+        //     catch (DbUpdateConcurrencyException ex)
+        //     {
+        //         var exceptionEntry = ex.Entries.Single();
+        //         var clientValues = (Department)exceptionEntry.Entity;
+        //         var databaseEntry = exceptionEntry.GetDatabaseValues();
+        //         if (databaseEntry == null)
+        //         {
+        //             ModelState.AddModelError(string.Empty, "Unable to save. " +
+        //                     "The department was deleted by another user.");
+        //             return Page();
+        //         }
+        //
+        //         var dbValues = (Department)databaseEntry.ToObject();
+        //         await SetDbErrorMessage(dbValues, clientValues, _context);
+        //
+        //         // Save the current ConcurrencyToken so next postback
+        //         // matches unless an new concurrency issue happens.
+        //         Department.ConcurrencyToken = dbValues.ConcurrencyToken;
+        //         // Clear the model error for the next postback.
+        //         ModelState.Remove($"{nameof(Department)}.{nameof(Department.ConcurrencyToken)}");
+        //     }
+        //     #endregion
+        // }
 
         InstructorNameSL = new SelectList(_context.Instructors,
                 "ID", "FullName", departmentToUpdate.InstructorId);
