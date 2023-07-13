@@ -7,14 +7,16 @@ public class Instructor
 {
     public int Id { get; set; }
 
+    [Required]
     [Display(Name = "Last Name")]
     [StringLength(50, MinimumLength=2)]
-    public required string LastName { get; set; }
+    public string LastName { get; set; }
 
+    [Required]
     [Column("FirstName")]
     [Display(Name = "First Name")]
     [StringLength(50, MinimumLength=2)]
-    public required string FirstMidName { get; set; }
+    public string FirstMidName { get; set; }
 
     [DataType(DataType.Date)]
     [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
