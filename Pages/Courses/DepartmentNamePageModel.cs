@@ -18,6 +18,8 @@ namespace ContosoUniversity.Pages.Courses
                                    orderby d.Name // Sort by name.
                                    select d;
 
+            // creates a SelectList to contain list of department names.
+            // if selectedDepartment is specified, that department is selected in the SelectList
             DepartmentNameSL = new SelectList(departmentsQuery.AsNoTracking(),
                 nameof(Department.DepartmentId),
                 nameof(Department.Name),
