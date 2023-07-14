@@ -3,8 +3,6 @@ using ContosoUniversity.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using System;
-using System.Threading.Tasks;
 
 namespace ContosoUniversity.Pages.Departments
 {
@@ -33,9 +31,6 @@ namespace ContosoUniversity.Pages.Departments
                 return Page();
             }
 
-#if SQLiteVersion
-            Department.ConcurrencyToken = Guid.NewGuid();
-#endif
             _context.Add(Department);
             await _context.SaveChangesAsync();
 

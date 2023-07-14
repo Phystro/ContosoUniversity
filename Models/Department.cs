@@ -21,6 +21,9 @@ public class Department
 
     public int? InstructorId { get; set; }
 
+    [Timestamp]// TimestampAttribute identifies column as a concurrency tracking column
+    public byte[] ConcurrencyToken { get; set; }
+
     public Instructor Administrator { get; set; }
     public ICollection<Course> Courses { get; set; } = default!;
 }

@@ -60,18 +60,23 @@ namespace ContosoUniversity.Pages.Instructors
                 }
             }
 
+            newInstructor.FirstMidName = Instructor.FirstMidName;
+            newInstructor.LastName = Instructor.LastName;
+            newInstructor.HireDate = Instructor.HireDate;
+            newInstructor.OfficeAssignment = Instructor.OfficeAssignment;
+
             try
             {
-                if (await TryUpdateModelAsync<Instructor>(
-                            newInstructor,
-                            "Instructor",
-                            i => i.FirstMidName, i => i.LastName,
-                            i => i.HireDate, i => i.OfficeAssignment))
-                {
-                    _context.Instructors.Add(newInstructor);
-                    await _context.SaveChangesAsync();
-                    return RedirectToPage("./Index");
-                }
+                // if (await TryUpdateModelAsync<Instructor>(
+                //             newInstructor,
+                //             "Instructor",
+                //             i => i.FirstMidName, i => i.LastName,
+                //             i => i.HireDate, i => i.OfficeAssignment))
+                // {
+                _context.Instructors.Add(newInstructor);
+                await _context.SaveChangesAsync();
+                // return RedirectToPage("./Index");
+                // }
                 return RedirectToPage("./Index");
             }
             catch (Exception ex)
