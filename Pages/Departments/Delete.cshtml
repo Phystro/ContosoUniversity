@@ -36,7 +36,8 @@
             @Html.DisplayNameFor(model => model.Department.ConcurrencyToken)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Department.ConcurrencyToken)
+            @Utility.GetLastChars(Model.Department.ConcurrencyToken)
+            <!-- @Html.DisplayFor(model => model.Department.ConcurrencyToken) -->
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Department.Administrator)
