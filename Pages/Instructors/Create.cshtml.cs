@@ -12,7 +12,7 @@ namespace ContosoUniversity.Pages.Instructors
         private readonly ILogger<InstructorCoursesPageModel> _logger;
 
         public CreateModel(SchoolContext context,
-                          ILogger<InstructorCoursesPageModel> logger)
+                ILogger<InstructorCoursesPageModel> logger)
         {
             _context = context;
             _logger = logger;
@@ -48,6 +48,7 @@ namespace ContosoUniversity.Pages.Instructors
             // Add selected Courses courses to the new instructor.
             foreach (var course in selectedCourses)
             {
+                // return tracked entity without a request to the database
                 var foundCourse = await _context.Courses.FindAsync(int.Parse(course));
                 if (foundCourse != null)
                 {
@@ -62,10 +63,10 @@ namespace ContosoUniversity.Pages.Instructors
             try
             {
                 if (await TryUpdateModelAsync<Instructor>(
-                                newInstructor,
-                                "Instructor",
-                                i => i.FirstMidName, i => i.LastName,
-                                i => i.HireDate, i => i.OfficeAssignment))
+                            newInstructor,
+                            "Instructor",
+                            i => i.FirstMidName, i => i.LastName,
+                            i => i.HireDate, i => i.OfficeAssignment))
                 {
                     _context.Instructors.Add(newInstructor);
                     await _context.SaveChangesAsync();
